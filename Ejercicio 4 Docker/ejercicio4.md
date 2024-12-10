@@ -88,11 +88,7 @@ En este ejemplo:
 **Comando Docker**: Para levantar una instancia de SQL Server en Linux (usando la imagen oficial de Microsoft):
 
 ```bash
-docker run -e "ACCEPT_EULA=Y" \
-    -e "SA_PASSWORD=Your_password123" \
-    -p 1433:1433 \
-    --name sqlserver \
-    -d mcr.microsoft.com/mssql/server:latest
+docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Your_password123" -p 1433:1433 --name sqlserver -d mcr.microsoft.com/mssql/server:latest
 ```
 Explicación:
 - `ACCEPT_EULA=Y`: Acepta los términos de la licencia.
@@ -109,6 +105,8 @@ Explicación:
 6. Contraseña: `Your_password123`.
 7. Conectar y, si es necesario, aceptar certificados o configuraciones.
 
+![](image1.png)
+![](image2.png)
 ## Usar Docker Compose para la base de datos
 Podemos definir un `docker-compose.yml` para levantar la base de datos con un solo comando `docker-compose up -d`:
 
@@ -117,19 +115,16 @@ version: '3.8'
 services:
   sqlserver:
     image: mcr.microsoft.com/mssql/server:latest
-    container_name: sqlserver
+    container_name: SOSQL
     environment:
       ACCEPT_EULA: "Y"
       SA_PASSWORD: "Your_password123"
     ports:
-      - "1433:1433"
+      - "1434:1434"
     volumes:
       - ./data:/var/opt/mssql/data
-    restart: unless-stopped
+    restart: unless-stop
 ```
 
-Con esto:
-
-Persistimos datos en `./data`.
-Podemos levantar la BD con `docker-compose up -d`.
-Conectarnos a la BD con las mismas credenciales (`SA`, `Your_password123`) desde Azure Data Studio.
+![](image3.png)
+![](image4.png)
