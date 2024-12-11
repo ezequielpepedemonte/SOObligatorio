@@ -1,0 +1,7 @@
+cpu.adb:6:35: error: subtype mark required in this context
+cpu.adb:6:35: error: found "CPU" declared at cpu.ads:1
+cpu.adb:8:23: error: "Memoria_Compartida" is undefined (more references follow)
+cpu.adb:10:10: error: invalid prefix in selected component "C"
+cpu.adb:10:35: error: invalid prefix in selected component "C"
+cpu.ads:4:35: error: subtype mark required in this context
+cpu.ads:4:35: error: found "CPU" declared at line 1

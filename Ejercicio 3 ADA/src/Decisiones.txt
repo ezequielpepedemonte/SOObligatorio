@@ -1,0 +1,23 @@
+Principales Decisiones
+
+1. Entry Status en CPU:
+El enunciado requería que, en cualquier momento, se pudiera consultar al CPU su estado, devolviendo el ID del CPU, el acumulador y el Instruction Pointer (IP). Para cumplir con este requisito, implementamos un entry llamado Status dentro del bucle principal de ejecución del CPU. Este entry fue configurado dentro de un bloque select con una cláusula OR y un pequeño delay. La inclusión del delay garantiza que, si no hay solicitudes pendientes para el entry, el programa no se bloquee y pueda continuar con el flujo normal de ejecución. Esto asegura que las operaciones del CPU, como la lectura de memoria, no se interrumpan innecesariamente.
+
+Dejamos este entry comentado en el main para que los profesores puedan probarlo fácilmente durante las evaluaciones.
+
+2. Finalización del código:
+
+El trabajo especificaba que solo uno de los CPUs debía imprimir el resultado final. Para lograr esto, era necesario implementar una adecuada sincronización, la cual se realizó utilizando semáforos. Además, introdujimos una variable global llamada Global_Terminate, que controla el flujo de los bucles de ejecución en todas las tareas. Cuando se ejecuta el comando para finalizar, esta variable cambia su valor y termina la ejecución de los bucles en los CPUs.
+
+Para garantizar que solo un CPU imprima el resultado final, empleamos un semáforo que bloquea al CPU elegido para que solo uno imprima el resultados. También consideramos otra posible implementación: agregar una condición en el proceso de finalización para identificar el CPU en ejecución. De esta manera, únicamente el CPU seleccionado imprimiría el resultado antes de terminar, mientras los demás simplemente cerrarían sus procesos.
+
+Decidimos no implementar esta segunda solución porque el objetivo principal del trabajo era demostrar dominio en el manejo de semáforos, no en la optimización de condiciones. Por otro lado, concluimos que finalizar manualmente el flujo del programa no afecta la calidad del trabajo, ya que su propósito principal radica en la correcta gestión de la concurrencia.
+
+3. Variable Valor inicializada en 8:
+El trabajo requería trabajar con una variable llamada Valor, iniciada con el valor 8. Interpretamos que el objetivo era simular el comportamiento de una máquina basada en memoria (bit-machine). Por esta razón, decidimos inicializar la variable Valor con 8, cargarla en la memoria simulada y operar sobre ella como parte del entorno de memoria.
+
+Las operaciones se realizaron utilizando el acumulador del CPU, y los resultados se almacenaron directamente en la memoria, emulando el comportamiento esperado de una bit-machine. Adicionalmente, agregamos una función en el CPU que sincroniza el valor de la variable Valor con el contenido del acumulador. Esto permitió cumplir tanto con el enunciado como con la funcionalidad de un CPU convencional.
+
+Con estas decisiones, nuestro objetivo fue crear un diseño funcional, coherente con los objetivos del trabajo, que demuestra dominio en la implementación de concurrencia y en el manejo de memoria simulada. Esperamos sepan entender.
+
+Saludos cordiales,
